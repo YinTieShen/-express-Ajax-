@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>瀑布流</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        .box{
+            width:1330px;
+            height:100%;
+            margin: 0 auto;
+            border: 1px solid black;
+
+        }
+        .content{
+
+            width: 69%;
+            height: 100%;
+            margin: 50px auto;
+            /* border: 1px solid salmon; */
+        }
+        .content::after{
+            display: block;
+            content: "";
+            clear: both;
+        }
+        .box .content li{
+            float: left;
+            margin:0 auto;
+            border: 1px solid purple;
+            text-align: center;
+            /* width:100px; */
+        }
+        .box .content li img{
+            width: 180px;
+        }
+        .box .content li p{
+            margin: 5px;
+        }
+        .btn{
+            position: relative;
+            left:50px;
+            bottom: 50px;
+        }
+    
+    </style>
+    <script src="/javascripts/Ajax_1.0.js"></script>
+</head>
+<body>
+    <div class="box">
+        <ul class="content" id="content">
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+            <li>
+                <img src="images/1.jpg" alt="">
+                <p>敢于行动</p>
+            </li>
+        </ul>
+    </div>
+    <button class="btn">点击更新</button>
+
+
+    <script>
+        
+        var str = "";
+        var ul = document.getElementById('content');
+            
+        window.onscroll= function() {
+            //页面总高度
+            var totalHeight = document.documentElement.scrollHeight;
+            //页面滚动高度
+            console.log(totalHeight);
+            var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop;
+            //窗口高度：
+            console.log(scrollHeight);
+            var clientHeight = document.documentElement.clientHeight;
+            console.log(clientHeight);
+
+            if(totalHeight - scrollHeight - clientHeight == 0){
+                Ajax('json').get('/data',function(data){
+                    data.forEach(function(value,key){
+                        str+=`<li>
+                            <img src="`+value.src+`" alt="">
+                            <p>`+value.des+`</p>
+                        </li>`;
+                    })
+                    ul.innerHTML += str;
+                })
+            }
+        
+        }
+
+
+    </script>
+</body>
+</html>
